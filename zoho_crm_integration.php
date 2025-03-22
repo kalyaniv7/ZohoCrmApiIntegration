@@ -14,7 +14,7 @@
 
 
 // Zoho CRM API credentials
-define('ZOHO_ACCESS_TOKEN', '1000.95af034cc6ac8a2b5df639b028e8ccbb.d77593090074ae7112a9c4bad8575d2d'); 
+define('ZOHO_ACCESS_TOKEN', '1000.f289af0c1299d7473157e63f83a16011.275bbdf5c3ab8d07b8400dede649e132'); 
 define('ZOHO_API_BASE_URL',  'https://www.zohoapis.com'); 
 define('ZOHO_API_DATACENTER_URL',  'https://accounts.zoho.com'); 
 
@@ -26,7 +26,8 @@ define('ZOHO_API_DATACENTER_URL',  'https://accounts.zoho.com');
 |   Contacts, etc.). Also set the search criteria key (such as Email).
 |--------------------------------------------------------------------------
 */
-$zohoModule       = 'Leads';  // Could also be 'Contacts', 'Deals', etc.
+$moduleLeads       = 'Leads';  // Could also be 'Contacts', 'Deals', etc.
+$moduleContacts       = 'Contacts';  // Could also be 'Contacts', 'Deals', etc.
 $searchField      = 'Email';  // Typically 'email', 'Phone', etc.
 $searchValue      = 'kalyani@test.com'; // The value you want to find in Zoho
 $newLeadData      = array(
@@ -63,26 +64,27 @@ try {
         throw new Exception('Failed to retrieve an Access Token.');
     }
 
-    // 2) Search existing record (by Email or other field)
-    $existingRecord = searchRecord($accessToken, $zohoModule, $searchField, $searchValue);
+    // 2) Search existing Lead by Email
+    $existingRecord = searchLead($accessToken, $moduleLeads, $searchField, $searchValue);
     
     if ($existingRecord['status_code'] == 200 && !empty($existingRecord['response']['data'])) {
-        // Found existing record
-        echo "<pre> Record found in Zoho CRM:\n";
+        // Found existing Lead
+        echo "<pre> Lead found in Zoho CRM Leads:\n";
         print_r($existingRecord['response']['data']);
     } else {
-
+        // 3) Search existing contact by Email
+        $existingRecord = searchLead($accessToken, $moduleContacts, $searchField, $searchValue);
             // Check for errors
         if ($existingRecord['status_code'] == 200 && !empty($existingRecord['response']['data'])) {
             // Found existing record
-            echo "<pre> Record found in Zoho CRM:\n";
+            echo "<pre> Lead found in Zoho CRM Contacts:\n";
             print_r($existingRecord['response']['data']);
 
         } else { 
             // No existing record => create a new one
             echo "No existing record found. Creating a new one...\n";
 
-            $createdRecord = createRecord($accessToken, $zohoModule, $newLeadData);
+            $createdRecord = createRecord($accessToken, $moduleLeads, $newLeadData);
             if ($createdRecord === false) {
                 throw new Exception('Failed to create new record in Zoho CRM.');
             }
@@ -108,7 +110,7 @@ try {
  * @param string $searchField  
  * @param string $searchValue
  */
-function searchRecord($accessToken, $module, $searchField, $searchValue) {
+function searchLead($accessToken, $module, $searchField, $searchValue) {
     // Example endpoint: https://www.zohoapis.com/crm/v3/Leads/search?criteria=(Email:equals:test@example.com)
 
     // We must URL-encode the criteria
