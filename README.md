@@ -6,7 +6,7 @@ Objective:
 Write a PHP script that integrates with Zoho CRM (API v3 or above) to:
 1. Search for an existing Enquiry (Lead or Contact).
 2. If it exists, display the result.
-3. If it does not exist, create a Lead in Zoho CRM and display the result.
+3. If it does not exist, create a Lead.
 
 ## Prerequisites
 - A Zoho CRM account
@@ -23,11 +23,12 @@ Write a PHP script that integrates with Zoho CRM (API v3 or above) to:
 4. Note down the following in the text file:
    - **Client ID**
    - **Client Secret**
-   - **Generate Scope with group of modules** 
+   - **Generate Scope with group of modules** like ZohoCRM.modules.leads.ALL,ZohoCRM.modules.contacts.ALL,ZohoCRM.modules.deals.ALL,ZohoCRM.settings.ALL
    
    Example : 
    ```
-   https://accounts.zoho.com/oauth/v2/token?grant_type=authorization_code&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&code=YOUR_AUTHORIZATION_CODE
+   
+https://accounts.zoho.com/oauth/v2/token?grant_type=authorization_code&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&code=YOUR_AUTHORIZATION_CODE
    ```
 ### Notes
 You can visit this link for detailed [OAuth 2.0 for v3 APIs- An Overview](https://www.zoho.com/crm/developer/docs/api/v3/oauth-overview.html) 
