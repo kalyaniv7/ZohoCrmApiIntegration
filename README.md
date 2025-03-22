@@ -26,7 +26,8 @@ Write a PHP script that integrates with Zoho CRM (API v3 or above) to:
    - **Generate Scope with group of modules** 
    
    Example : 
-   ```   https://accounts.zoho.com/oauth/v2/token?grant_type=authorization_code&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&code=YOUR_AUTHORIZATION_CODE
+   ```
+   https://accounts.zoho.com/oauth/v2/token?grant_type=authorization_code&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&code=YOUR_AUTHORIZATION_CODE
    ```
 ### Notes
 You can visit this link for detailed [OAuth 2.0 for v3 APIs- An Overview](https://www.zoho.com/crm/developer/docs/api/v3/oauth-overview.html) 
