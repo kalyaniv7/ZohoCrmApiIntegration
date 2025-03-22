@@ -23,13 +23,10 @@ Write a PHP script that integrates with Zoho CRM (API v3 or above) to:
 4. Note down the following in the text file:
    - **Client ID**
    - **Client Secret**
-   - **Generate Scope with group of modules** like ZohoCRM.modules.leads.ALL,ZohoCRM.modules.contacts.ALL,ZohoCRM.modules.deals.ALL,ZohoCRM.settings.ALL
+   - **Generate Scope with group of modules** like [ZohoCRM.modules.leads.ALL,ZohoCRM.modules.contacts.ALL,ZohoCRM.modules.deals.ALL,ZohoCRM.settings.ALL]
    
-   Example : 
-   ```
+   Example : `https://accounts.zoho.com/oauth/v2/token?grant_type=authorization_code&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&code=YOUR_AUTHORIZATION_CODE`
    
-https://accounts.zoho.com/oauth/v2/token?grant_type=authorization_code&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&code=YOUR_AUTHORIZATION_CODE
-   ```
 ### Notes
 You can visit this link for detailed [OAuth 2.0 for v3 APIs- An Overview](https://www.zoho.com/crm/developer/docs/api/v3/oauth-overview.html) 
 Follow this link for more information - [Scopes](https://www.zoho.com/crm/developer/docs/api/v3/scopes.html)
@@ -37,18 +34,17 @@ Follow this link for more information - [Scopes](https://www.zoho.com/crm/develo
 
 ### 1.2 Generate OAuth Tokens
 1. Obtain the `code` parameter:
-   ```
-   https://accounts.zoho.com/oauth/v2/token?grant_type=authorization_code&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&code=YOUR_AUTHORIZATION_CODE
-   ```
-2. Exchange `code` for an `access_token` and `refresh_token`:
-   ```
+   `https://accounts.zoho.com/oauth/v2/token?grant_type=authorization_code&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&code=YOUR_AUTHORIZATION_CODE`
+   
+3. Exchange `code` for an `access_token` and `refresh_token`:
+   ```bash
    curl -X POST https://accounts.zoho.com/oauth/v2/token \
    -d "client_id=YOUR_CLIENT_ID" \
    -d "client_secret=YOUR_CLIENT_SECRET" \
    -d "code=YOUR_AUTHORIZATION_CODE" \
    -d "grant_type=authorization_code"
    ```
-3. Store the `refresh_token` securely for generating future access tokens.
+4. Store the `refresh_token` securely for generating future access tokens.
 
 ## Step 2: Search for an Existing Enquiry
 To search for an existing Lead or Contact, use the `searchLead` API:
